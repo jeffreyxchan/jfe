@@ -9,6 +9,10 @@ const apiProxy = httpProxy.createProxyServer()
 
 app.use(morgan("common"))
 
+app.get("/status", (req, res) => {
+	res.send("Hello, World!")
+})
+
 for (s of config.services) {
 	app.all(s.PROXY_PATH, function(req, res) {
 		apiProxy.web(req, res, { target: s.TARGET })
